@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+	<title>Pinner</title>
+	<link rel="stylesheet" href="/public/css/foundation.css">
+	<link rel="stylesheet" href="/public/css/normalize.css">
+	<link rel="stylesheet" href="/public/css/pinner.css">
+	<script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="/public/js/reflow.js"></script>
+</head>
+<body>
+	<nav class="top-bar">
+		<ul class="title-area">
+			<li class="name">
+				<h1><a href="#">Pinner</a></h1>
+			</li>
+			<li class="toggle-topbar menu-icon">
+				<a href="#"><span>Menu</span></a>
+			</li>
+		</ul>
+		<section class="top-bar-section">
+			<ul class="right">
+				<li><a href="#">Register</a></li>
+			</ul>
+		</section>
+	</nav>
+	<div class="container">
+		{% block body %}{% endblock %}
+	</div>
+</body>
+</html>

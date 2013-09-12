@@ -1,11 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask
+from flask.ext.mongokit import MongoKit
 import random
+import os
 
-app = Flask(__name__)
+PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-app.config['DEBUG'] = True
+app = Flask(__name__, static_folder=os.path.join(PROJECT_ROOT, 'public'), static_url_path='/public')
+app.config.from_pyfile("settings.py")
 
-@app.route("/")
-def index():
-	pins = [random.randint(50,200) for x in range(1,50)]
-	return render_template("index.jinja", pins = pins)
+db = MongoKit(app)
+
+from pinner.models import *
+from pinner.views import *

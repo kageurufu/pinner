@@ -1,0 +1,31 @@
+header {
+	position: fixed;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	height: 40px;
+	background-color: #ddd;
+	z-index: 200;
+}
+div.container {
+	width: 100%;
+	background-color: #ffd;
+}
+div.pin {
+	width: 180px;
+	border: 1px gray solid;
+	padding: 2px;
+	margin-top: 50px;
+	margin-left: 5px;
+	margin-right: 5px;
+	background-color: green;
+	position: absolute;
+	transition: top 1s, left 1s;
+	-moz-transition: top 1s, left 1s;
+	-o-transition: top 1s, left 1s;
+	-webkit-transition: top 1s, left 1s;
+}
+body {
+	overflow-y: scroll;
+	overflow: scroll;
+}
