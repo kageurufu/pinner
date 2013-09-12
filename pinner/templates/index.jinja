@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+	<title>Pinner</title>
+	<style>
+		header {
+			position: fixed;
+			width: 100%;
+			left: 0px;
+			top: 0px;
+			height: 40px;
+			background-color: #ddd;
+			z-index: 200;
+		}
+		div.container {
+			width: 100%;
+			background-color: #ffd;
+		}
+		div.pin {
+			width: 180px;
+			border: 1px gray solid;
+			padding: 2px;
+			margin-top: 50px;
+			margin-left: 5px;
+			margin-right: 5px;
+			background-color: green;
+			position: absolute;
+			transition: top 1s, left 1s;
+			-moz-transition: top 1s, left 1s;
+			-o-transition: top 1s, left 1s;
+			-webkit-transition: top 1s, left 1s;
+		}
+		body {
+			margin-top: 50px;
+		}
+	</style>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+	<header>
+		<p>Some logo goes here</p>
+	</header>
+	<div class="container">
+		{% for i in pins %}
+			<div class="pin"
+				style="top: 10000px; left: 0px; height: {{ i }}px;">
+				Some content here
+			</div>
+		{% endfor %}
+	</div>
+	<script>
+	var reflow = function() {
+		var colWidth = 190;
+		var pins = $("div.pin");
+		var container = $("div.container");
+		var cols = Math.floor(container.width() / colWidth);
+		var colHeightArray = new Array(cols);
+
+		for(var i = 0; i < cols; i++) {
+			colHeightArray[i] = 0;
+		}
+
+		function findSmallestCol(colHeightArray) {
+			var cols = colHeightArray.length;
+			var smallestSize = colHeightArray[0];
+			var smallest = 0;
+			for(var i = 0; i < cols; i++) {
+				if(colHeightArray[i] < smallestSize) {
+					smallest = i;
+					smallestSize = colHeightArray[i];
+				}
+			}
+			return smallest;
+		}
+
+		pins.each(function() {
+			var pin = $(this);
+			var col = findSmallestCol(colHeightArray);
+			console.log(col);
+			pin.css('left', (col * colWidth) + "px") ;
+			pin.css('top', colHeightArray[col] + "px");
+
+			colHeightArray[col] += pin.height() + 10;
+		});
+	};
+
+	window.onresize = function(e) {
+		if(window.timeout) {
+			clearTimeout(window.timeout);
+		}
+		setTimeout(reflow, 500);
+	}
+	$(reflow);
+	</script>
+</body>
+</html>
